@@ -18,6 +18,7 @@ namespace TestMod.Projectiles
 
         public override void SetDefaults()
         {
+            projectile.arrow = true;
             projectile.width = 2; //sprite is 2 pixels wide
             projectile.height = 20; //sprite is 20 pixels tall
             projectile.aiStyle = 0; //projectile moves in a straight line
@@ -25,25 +26,6 @@ namespace TestMod.Projectiles
             projectile.ranged = true; //ranged projectile
             projectile.timeLeft = 600; //lasts for 600 frames/ticks. Terraria runs at 60FPS, so it lasts 10 seconds.
             aiType = ProjectileID.WoodenArrowHostile; //This clones the exact AI of the vanilla projectile Bullet.
-        }
-
-        private void SplitAtRandom(int chanceOfSuccess, Action onSuccess, Action onFailure)
-        {
-            // Seed
-            if (generator == null)
-                generator = new Random(DateTime.Now.Millisecond);
-
-            // By chance
-            if (generator.Next(100) < chanceOfSuccess)
-            {
-                if (onSuccess != null)
-                    onSuccess();
-            }
-            else
-            {
-                if (onFailure != null)
-                    onFailure();
-            }
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -56,19 +38,18 @@ namespace TestMod.Projectiles
         {
             for (int i = 0; i < 5; i++)
             {
-                SplitAtRandom(5,
-                              () => { /* 5% of the time Success*/
-                                  float scaleFactor4 = projectile.velocity.Length();
-                                  Vector2 velocity = projectile.velocity;
-                                  velocity.Normalize();
-                                  Vector2 vector12 = new Vector2((float)Main.rand.Next(-100, 101), (float)Main.rand.Next(-100, 101));
-                                  vector12.Normalize();
-                                  vector12 += velocity * 2f * (i / 2);
-                                  vector12.Normalize();
-                                  vector12 *= scaleFactor4;
-                                  Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, vector12.X, vector12.Y, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, -1000f);
-                              },
-                              () => { /* 50% of the time Failure*/ });
+                if (Main.rand.NextFloat() < 0.05f)  // .1323f == 13.23% change
+                { /* 5% of the time Success*/
+                    float scaleFactor4 = projectile.velocity.Length();
+                    Vector2 velocity = projectile.velocity;
+                    velocity.Normalize();
+                    Vector2 vector12 = new Vector2((float)Main.rand.Next(-100, 101), (float)Main.rand.Next(-100, 101));
+                    vector12.Normalize();
+                    vector12 += velocity * 2f * (i / 2);
+                    vector12.Normalize();
+                    vector12 *= scaleFactor4;
+                    Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, vector12.X, vector12.Y, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, -1000f);
+                }
             }
         }
 
