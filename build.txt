@@ -1,0 +1,5 @@
+﻿buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
+includePDB = true
+author = x3n0r
+version = 0.1
+displayName = TestMod
