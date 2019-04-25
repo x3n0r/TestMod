@@ -6,3 +6,11 @@ E:\Projects\TestMod\TestMod\obj\Debug\TestMod.csproj.CoreCompileInputs.cache
 E:\Projects\TestMod\TestMod\obj\Debug\TestMod.csproj.CopyComplete
 E:\Projects\TestMod\TestMod\obj\Debug\TestMod.dll
 E:\Projects\TestMod\TestMod\obj\Debug\TestMod.pdb
+C:\Users\Christopher\Documents\My Games\TestMod\bin\Debug\TestMod.dll
+C:\Users\Christopher\Documents\My Games\TestMod\bin\Debug\TestMod.pdb
+C:\Users\Christopher\Documents\My Games\TestMod\bin\Debug\Terraria.exe
+C:\Users\Christopher\Documents\My Games\TestMod\obj\Debug\TestMod.csprojAssemblyReference.cache
+C:\Users\Christopher\Documents\My Games\TestMod\obj\Debug\TestMod.csproj.CoreCompileInputs.cache
+C:\Users\Christopher\Documents\My Games\TestMod\obj\Debug\TestMod.csproj.CopyComplete
+C:\Users\Christopher\Documents\My Games\TestMod\obj\Debug\TestMod.dll
+C:\Users\Christopher\Documents\My Games\TestMod\obj\Debug\TestMod.pdb

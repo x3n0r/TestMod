@@ -18,14 +18,17 @@ namespace TestMod.Projectiles
 
         public override void SetDefaults()
         {
+            drawOffsetX = -2;
+            drawOriginOffsetX = 0;
+            drawOriginOffsetY = 0;
             projectile.arrow = true;
-            projectile.width = 2; //sprite is 2 pixels wide
-            projectile.height = 20; //sprite is 20 pixels tall
-            projectile.aiStyle = 0; //projectile moves in a straight line
+            projectile.width = 8; //hitbox is 8 pixels wide
+            projectile.height = 8; //hiutbox is 8 pixels high
+            projectile.aiStyle = 0; 
             projectile.friendly = true; //player projectile
             projectile.ranged = true; //ranged projectile
-            projectile.timeLeft = 600; //lasts for 600 frames/ticks. Terraria runs at 60FPS, so it lasts 10 seconds.
-            aiType = ProjectileID.WoodenArrowHostile; //This clones the exact AI of the vanilla projectile Bullet.
+            projectile.timeLeft = 300; //lasts for 300 frames/ticks. Terraria runs at 60FPS, so it lasts 5 seconds.
+            aiType = ProjectileID.WoodenArrowFriendly;
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -36,13 +39,14 @@ namespace TestMod.Projectiles
 
         private void splitProjectile()
         {
+            float scaleFactor4 = projectile.velocity.Length();
+            Vector2 velocity = projectile.velocity;
+            velocity.Normalize();
+
             for (int i = 0; i < 5; i++)
             {
-                if (Main.rand.NextFloat() < 0.05f)  // .1323f == 13.23% change
+                if (Main.rand.NextFloat() < 0.05f)  // 0.05f == 5%chance.1323f == 13.23% chance
                 { /* 5% of the time Success*/
-                    float scaleFactor4 = projectile.velocity.Length();
-                    Vector2 velocity = projectile.velocity;
-                    velocity.Normalize();
                     Vector2 vector12 = new Vector2((float)Main.rand.Next(-100, 101), (float)Main.rand.Next(-100, 101));
                     vector12.Normalize();
                     vector12 += velocity * 2f * (i / 2);
@@ -59,75 +63,10 @@ namespace TestMod.Projectiles
             Main.PlaySound(SoundID.Item10, projectile.position);
         }
         public override void AI()
-        {   /*
-            int num3 = projectile.frameCounter;
+        {  
             if (Main.rand.NextBool(3))
             {
-                Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, 6, projectile.velocity.X * 0.5f, projectile.velocity.Y * 0.5f);
-            }
-            projectile.frameCounter = num3 + 1;
-            if (projectile.frameCounter > 0)
-            {
-                num3 = projectile.frame;
-                projectile.frame = num3 + 1;
-                projectile.frameCounter = 0;
-                if (projectile.frame > 2)
-                {
-                    projectile.frame = 0;
-                }
-            }
-            if (projectile.velocity.X < 0f)
-            {
-                projectile.spriteDirection = -1;
-                projectile.rotation = (float)Math.Atan2(-(double)projectile.velocity.Y, -(double)projectile.velocity.X);
-            }
-            else
-            {
-                projectile.spriteDirection = 1;
-                projectile.rotation = (float)Math.Atan2((double)projectile.velocity.Y, (double)projectile.velocity.X);
-            }
-            if (projectile.ai[0] >= 0f && projectile.ai[0] < 200f)
-            {
-                int num543 = (int)projectile.ai[0];
-                NPC nPC2 = Main.npc[num543];
-                if (nPC2.CanBeChasedBy(projectile, false))
-                {
-                    float num544 = 20f;
-                    Vector2 vector40 = new Vector2(projectile.position.X + (float)projectile.width * 0.5f, projectile.position.Y + (float)projectile.height * 0.5f);
-                    float num545 = Main.npc[num543].position.X - vector40.X;
-                    float num546 = Main.npc[num543].position.Y - vector40.Y;
-                    float num547 = (float)Math.Sqrt((double)(num545 * num545 + num546 * num546));
-                    num547 = num544 / num547;
-                    num545 *= num547;
-                    num546 *= num547;
-                    projectile.velocity.X = (projectile.velocity.X * 14f + num545) / 15f;
-                    projectile.velocity.Y = (projectile.velocity.Y * 14f + num546) / 15f;
-                }
-                else
-                {
-                    float num548 = 1000f;
-                    for (int num549 = 0; num549 < 200; num549++)
-                    {
-                        if (Main.npc[num549].CanBeChasedBy(projectile, false))
-                        {
-                            float num550 = Main.npc[num549].position.X + (float)(Main.npc[num549].width / 2);
-                            float num551 = Main.npc[num549].position.Y + (float)(Main.npc[num549].height / 2);
-                            float num552 = Math.Abs(projectile.position.X + (float)(projectile.width / 2) - num550) + Math.Abs(projectile.position.Y + (float)(projectile.height / 2) - num551);
-                            if (num552 < num548 && Collision.CanHit(projectile.position, projectile.width, projectile.height, Main.npc[num549].position, Main.npc[num549].width, Main.npc[num549].height))
-                            {
-                                num548 = num552;
-                                projectile.ai[0] = (float)num549;
-                            }
-                        }
-                    }
-                }
-                return;
-            }
-            projectile.Kill();
-            return;*/
-            if (Main.rand.NextBool(3))
-            {
-                Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, 6, projectile.velocity.X * 0.5f, projectile.velocity.Y * 0.5f);
+                Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, 13, projectile.velocity.X * 0.5f, projectile.velocity.Y * 0.5f);
             }
 
             float num132 = (float)Math.Sqrt((double)(projectile.velocity.X * projectile.velocity.X + projectile.velocity.Y * projectile.velocity.Y));
@@ -204,6 +143,9 @@ namespace TestMod.Projectiles
                 projectile.velocity.X = (projectile.velocity.X * (float)(num149 - 1) + num146) / (float)num149;
                 projectile.velocity.Y = (projectile.velocity.Y * (float)(num149 - 1) + num147) / (float)num149;
             }
+            projectile.rotation = projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            //OR
+            //projectile.rotation = (float)Math.Atan2((double)projectile.velocity.Y, (double)projectile.velocity.X) + 1.57f;
         }
     }
 
