@@ -28,6 +28,7 @@ namespace TestMod.Projectiles
             projectile.friendly = true; //player projectile
             projectile.ranged = true; //ranged projectile
             projectile.timeLeft = 300; //lasts for 300 frames/ticks. Terraria runs at 60FPS, so it lasts 5 seconds.
+            projectile.knockBack = 2f;
             aiType = ProjectileID.WoodenArrowFriendly;
         }
 
@@ -52,7 +53,7 @@ namespace TestMod.Projectiles
                     vector12 += velocity * 2f * (i / 2);
                     vector12.Normalize();
                     vector12 *= scaleFactor4;
-                    Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, vector12.X, vector12.Y, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, 0f, -1000f);
+                    Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, vector12.X, vector12.Y, projectile.type, projectile.damage, projectile.knockBack, projectile.owner, -1f, -1000f);
                 }
             }
         }

@@ -51,6 +51,7 @@
     <Compile Include="Items\Weapons\ProjectileTest.cs" />
     <Compile Include="Items\Weapons\MonsterBow.cs" />
     <Compile Include="Items\Weapons\asdf.cs" />
+    <Compile Include="Projectiles\ProjectileOrbit.cs" />
     <Compile Include="Projectiles\ProjectileTestProj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestModClass.cs" />
@@ -61,11 +62,12 @@
     <Content Include="Items\Weapons\asdf.png" />
     <Content Include="Items\Weapons\MonsterBow.png" />
     <Content Include="Items\Weapons\ProjectileTest.png" />
+    <Content Include="Projectiles\ProjectileOrbit.png" />
     <Content Include="Projectiles\ProjectileTestProj.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>"C:\Users\A3270\Steam\steamapps\common\Terraria\tModLoaderServer" -build "$(ProjectDir)\" -eac "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

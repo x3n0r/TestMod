@@ -1,6 +1,5 @@
 E:\Projects\TestMod\TestMod\bin\Debug\TestMod.dll
 E:\Projects\TestMod\TestMod\bin\Debug\TestMod.pdb
-E:\Projects\TestMod\TestMod\bin\Debug\Terraria.exe
 E:\Projects\TestMod\TestMod\obj\Debug\TestMod.csprojAssemblyReference.cache
 E:\Projects\TestMod\TestMod\obj\Debug\TestMod.csproj.CoreCompileInputs.cache
 E:\Projects\TestMod\TestMod\obj\Debug\TestMod.csproj.CopyComplete

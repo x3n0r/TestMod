@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -24,6 +26,7 @@ namespace TestMod.Items.Weapons
 			item.rare = 2;
 			item.UseSound = SoundID.Item1;
 			item.autoReuse = true;
+            item.shoot = mod.ProjectileType("ProjectileOrbit");
 		}
 
 		public override void AddRecipes()
@@ -34,5 +37,26 @@ namespace TestMod.Items.Weapons
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}
-	}
+
+        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        {
+            if (Main.rand.NextFloat() < 0.01f)
+            {
+                createProjectile(player,damage, knockBack);
+            }
+            return false;
+        }
+
+        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        {
+            createProjectile(player,damage,knockBack);
+            base.OnHitNPC(player, target, damage, knockBack, crit);
+        }
+
+        private void createProjectile(Player player,int damage, float knockBack)
+        {
+            damage = damage / 5;
+            Projectile.NewProjectile(player.position, player.velocity, mod.ProjectileType("ProjectileOrbit"), damage, knockBack, player.whoAmI, -1f, -1000f);
+        }
+    }
 }
